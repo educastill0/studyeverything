@@ -33,7 +33,7 @@ public class Examen {
             if (conexion != null) {
                 System.out.println("Conexion exitosa!");
             } else {
-                System.out.println("Conexion fallida!");
+                System.out.println("Conexion fallidasdfsdfsdfsdf!");
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Ocurrio la siguiente excepcion : " + e.toString());
