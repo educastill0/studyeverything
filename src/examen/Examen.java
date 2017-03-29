@@ -8,6 +8,7 @@ import clases.materia;
 import clases.pregunta;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -101,7 +102,14 @@ public class Examen {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ArrayList materias = new Examen().getMateria();
         Examen baseDatos = new Examen().conectar();
+        Iterator it = materias.iterator();
+        while(it.hasNext()){
+            Object objeto = it.next();
+            materia materia = (materia)objeto;
+            System.out.println(materia);
+        }
         login l = new login();
         l.setConexion(conexion);
         l.setVisible(true);
