@@ -36,9 +36,9 @@ public class Preguntas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAnterior = new javax.swing.JButton();
+        btnTerminar = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("PREGUNTAS");
@@ -58,21 +58,26 @@ public class Preguntas extends javax.swing.JFrame {
 
         jLabel6.setText("C)");
 
-        jButton1.setText("ANTERIOR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAnterior.setText("ANTERIOR");
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAnteriorActionPerformed(evt);
             }
         });
 
-        jButton2.setText("TERMINAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnTerminar.setText("TERMINAR");
+        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnTerminarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("SIGUIENTE");
+        btnSiguiente.setText("SIGUIENTE");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,11 +103,11 @@ public class Preguntas extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton1)))
+                                .addComponent(btnAnterior)))
                         .addGap(70, 70, 70)
-                        .addComponent(jButton2)
+                        .addComponent(btnTerminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btnSiguiente)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,9 +127,9 @@ public class Preguntas extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAnterior)
+                    .addComponent(btnTerminar)
+                    .addComponent(btnSiguiente))
                 .addContainerGap())
         );
 
@@ -143,11 +148,11 @@ public class Preguntas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAnteriorActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         // TODO add your handling code here:
         int salir;
 
@@ -159,7 +164,36 @@ public class Preguntas extends javax.swing.JFrame {
             System.exit(salir);
 
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnTerminarActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+        int conpreguntas;
+        conpreguntas=0;
+        int correctas;
+        correctas=0;
+        int incorrectas;
+        incorrectas=0;
+        
+
+        
+          int[][] pregunta =new int [conpreguntas][6];
+        boolean op_seleccionada = false;
+        boolean respuest_correcta = false;
+            
+        if(respuest_correcta==op_seleccionada){
+             correctas = correctas+1;
+            
+        }else{
+             incorrectas = incorrectas+1;
+        }
+        int calificacion = 0;
+        
+        if ( calificacion >= 7){
+        
+                }else{
+                        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,9 +231,9 @@ public class Preguntas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnTerminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
