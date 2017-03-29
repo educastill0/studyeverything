@@ -29,7 +29,7 @@ public class Examen {
     public Examen conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String BaseDeDatos = "jdbc:mysql://localhost:3306/examendb?user=root&password=";
+            String BaseDeDatos = "jdbc:mysql://db.interface.mx:3306/examendb?user=examenusr&password=3X4m3n2017";
             setConexion(DriverManager.getConnection(BaseDeDatos));
             if (conexion != null) {
                 System.out.println("Conexion exitosa!");
