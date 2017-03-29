@@ -5,6 +5,9 @@
  */
 package examen;
 
+import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +15,9 @@ import javax.swing.JOptionPane;
  * @author SIMGE
  */
 public class login extends javax.swing.JFrame {
+Connection conn=null;
+PreparedStatement pst=null;
+ResultSet rs=null;
 
     /**
      * Creates new form login
@@ -34,8 +40,13 @@ public class login extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        MenuSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("LOGIN");
+        setResizable(false);
 
         jLabel1.setText("Usuario:");
 
@@ -53,6 +64,20 @@ public class login extends javax.swing.JFrame {
                 txtUsuarioActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("OPCIONES");
+
+        MenuSalir.setText("SALIR");
+        MenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MenuSalir);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,7 +100,7 @@ public class login extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -88,25 +113,50 @@ public class login extends javax.swing.JFrame {
                 .addGap(8, 8, 8))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(332, 206));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
-        String usuario = txtUsuario.getText();
-        String password = txtPassword.getText();
-        if(usuario.equals("usuario") && password.equals("admin")){
-            PantallaPrincipal pp = new PantallaPrincipal();
-            pp.setVisible(true);
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrrecta...");
+        conn=MysqlConnect.ConnectDB();
+        String Sql="Select * from tusuarios where usuario=? and contrasena=?";
+        try{
+            pst=conn.prepareStatement(Sql);
+            pst.setString(1,txtUsuario.getText());
+            pst.setString(2,txtPassword.getText());
+            rs=pst.executeQuery();
+            if(rs.next()){
+                //JOptionPane.showMessageDialog(null,"welcome user");
+                PantallaPrincipal P=new PantallaPrincipal();
+                P.setVisible(true);
+                dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Usuario o Password Incorrectos","Acceso ",JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void MenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSalirActionPerformed
+        // TODO add your handling code here:
+        int salir;
+        
+        salir=JOptionPane.showConfirmDialog(this,"Desea Salir","Salir Del Sistema",JOptionPane.OK_OPTION);
+        
+        if(salir==0)
+            
+        {
+            System.exit(salir);
+        }
+    }//GEN-LAST:event_MenuSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,9 +194,12 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuSalir;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

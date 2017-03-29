@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class Examen {
 
+  
    private Connection conexion;
 
     public Connection getConexion() {
@@ -28,12 +29,12 @@ public class Examen {
     public Examen conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String BaseDeDatos = "jdbc:mysql://localhost:3306/examendb?user=root&password=";
+            String BaseDeDatos = "jdbc:mysql://localhost:3306/datos?user=root&password=6461605611";
             setConexion(DriverManager.getConnection(BaseDeDatos));
             if (conexion != null) {
                 System.out.println("Conexion exitosa!");
             } else {
-                System.out.println("Conexion fallidasdfsdfsdfsdf!");
+                System.out.println("Conexion fallida!");
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Ocurrio la siguiente excepcion : " + e.toString());
