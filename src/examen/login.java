@@ -18,12 +18,28 @@ public class login extends javax.swing.JFrame {
 Connection conexion=null;
 PreparedStatement pst=null;
 ResultSet rs=null;
+ 
 
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+ 
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                close();
+            }
+        });
+    }
+ 
+    private void close(){
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?",
+                "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+            System.exit(0);
+    
     }
     
 public void setConexion(Connection conexion) {
@@ -44,11 +60,8 @@ public void setConexion(Connection conexion) {
         btnIniciar = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        MenuSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
         setResizable(false);
 
@@ -68,20 +81,6 @@ public void setConexion(Connection conexion) {
                 txtUsuarioActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("OPCIONES");
-
-        MenuSalir.setText("SALIR");
-        MenuSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(MenuSalir);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,7 +103,7 @@ public void setConexion(Connection conexion) {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -150,19 +149,6 @@ public void setConexion(Connection conexion) {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
-    private void MenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSalirActionPerformed
-        // TODO add your handling code here:
-        int salir;
-        
-        salir=JOptionPane.showConfirmDialog(this,"Desea Salir","Salir Del Sistema",JOptionPane.OK_OPTION);
-        
-        if(salir==0)
-            
-        {
-            System.exit(salir);
-        }
-    }//GEN-LAST:event_MenuSalirActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -199,12 +185,9 @@ public void setConexion(Connection conexion) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MenuSalir;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
