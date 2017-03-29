@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author SIMGE
  */
 public class login extends javax.swing.JFrame {
-Connection conn=null;
+Connection conexion=null;
 PreparedStatement pst=null;
 ResultSet rs=null;
 
@@ -24,6 +24,10 @@ ResultSet rs=null;
      */
     public login() {
         initComponents();
+    }
+    
+public void setConexion(Connection conexion) {
+        this.conexion = conexion;
     }
 
     /**
@@ -119,10 +123,10 @@ ResultSet rs=null;
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
-        conn=MysqlConnect.ConnectDB();
+        
         String Sql="Select * from tusuarios where usuario=? and contrasena=?";
         try{
-            pst=conn.prepareStatement(Sql);
+            pst=conexion.prepareStatement(Sql);
             pst.setString(1,txtUsuario.getText());
             pst.setString(2,txtPassword.getText());
             rs=pst.executeQuery();
@@ -130,6 +134,7 @@ ResultSet rs=null;
                 //JOptionPane.showMessageDialog(null,"welcome user");
                 PantallaPrincipal P=new PantallaPrincipal();
                 P.setVisible(true);
+                P.setConexion(conexion);
                 dispose();
             }
             else{

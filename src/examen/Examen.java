@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Examen {
 
   
-   private Connection conexion;
+   public static Connection conexion;
 
     public Connection getConexion() {
         return conexion;
@@ -29,7 +29,7 @@ public class Examen {
     public Examen conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String BaseDeDatos = "jdbc:mysql://localhost:3306/datos?user=root&password=6461605611";
+            String BaseDeDatos = "jdbc:mysql://localhost:3306/examendb?user=root&password=";
             setConexion(DriverManager.getConnection(BaseDeDatos));
             if (conexion != null) {
                 System.out.println("Conexion exitosa!");
@@ -103,6 +103,7 @@ public class Examen {
         // TODO code application logic here
         Examen baseDatos = new Examen().conectar();
         login l = new login();
+        l.setConexion(conexion);
         l.setVisible(true);
     }
     

@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  * @author SIMGE
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
-Connection conn=null;
+Connection conexion=null;
 PreparedStatement pst=null;
 ResultSet rs=null;
 
@@ -23,6 +23,10 @@ ResultSet rs=null;
      */
     public PantallaPrincipal() {
         initComponents();
+    }
+    
+    public void setConexion(Connection conexion) {
+        this.conexion = conexion;
     }
 
     /**
@@ -113,7 +117,6 @@ ResultSet rs=null;
         // TODO add your handling code here:
         new Preguntas().setVisible(true);
         this.dispose();
-        conn=MysqlConnect.ConnectDB();
         String Sql="Select * from tcatmateria where Matematicas=?";
     }//GEN-LAST:event_btnMatematicasActionPerformed
 
@@ -121,7 +124,6 @@ ResultSet rs=null;
         // TODO add your handling code here:
         new Preguntas().setVisible(true);
         this.dispose();
-        conn=MysqlConnect.ConnectDB();
         String Sql="Select * from tcatmateria where Lectura=?";
     }//GEN-LAST:event_btnLecturaActionPerformed
 
