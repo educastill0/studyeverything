@@ -6,13 +6,26 @@
 package examen;
 
 
+import static examen.Examen.conexion;
+import java.sql.*;
+import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+
+
 
 /**
  *
  * @author jerso
  */
 public class ContadorPreguntas extends javax.swing.JFrame {
+static Connection conexion=null; 
+static Statement sentencia=null; 
+static ResultSet txtMaterias=null;
+
+
     
     /**
      * Creates new form ContadorPreguntas
@@ -49,7 +62,7 @@ public class ContadorPreguntas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnIniciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMaterias = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CONTADOR DE PREGUNTAS");
@@ -66,9 +79,9 @@ public class ContadorPreguntas extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MATERIA:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtMaterias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtMateriasActionPerformed(evt);
             }
         });
 
@@ -81,10 +94,8 @@ public class ContadorPreguntas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTextField1)))
+                            .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaterias)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -96,7 +107,7 @@ public class ContadorPreguntas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(btnIniciar)
                 .addGap(46, 46, 46))
@@ -124,10 +135,63 @@ public class ContadorPreguntas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMateriasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+{ 
+            try { 
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+    {
+                try { 
+                    conexion=DriverManager.getConnection("jdbc:mysql://db.interface.mx:3306/examendb?user=examenusr&password=3X4m3n2017");
+                } catch (SQLException ex) {
+                    Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try { 
+                    sentencia=conexion.createStatement();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try { 
+                    txtMaterias=sentencia.executeQuery("select*from evaluacion");
+                } catch (SQLException ex) {
+                    Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try { 
+                    txtMaterias.first();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try { 
+                    Matematicas.setText(txtMaterias.getString("Matematicas"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try { 
+                    Lectura.setText(txtMaterias.getString("Lectura"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+    }//GEN-LAST:event_txtMateriasActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+  
+   try 
+   {
+       catch (SQLException ex){
+        Logger.getLogger(ContadorPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+   }
+   
+    
+            
     /**
      * @param args the command line arguments
      */
@@ -167,6 +231,6 @@ public class ContadorPreguntas extends javax.swing.JFrame {
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtMaterias;
     // End of variables declaration//GEN-END:variables
-}
+
