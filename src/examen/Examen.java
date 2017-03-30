@@ -76,7 +76,7 @@ public class Examen {
         public ArrayList getMateria() {
         ArrayList listaMaterias=new ArrayList();
         try{
-            PreparedStatement consulta = conexion.prepareStatement("select idmateria,materia from tmaterias order by idmateria");
+            PreparedStatement consulta = conexion.prepareStatement("Select idmateria,materia from tmaterias order by idmateria");
             ResultSet result;
             result = consulta.executeQuery();
             while(result.next()){
