@@ -139,7 +139,6 @@ ResultSet rs=null;
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
-        new ContadorPreguntas().setVisible(true);
         this.dispose();
         //String Sql="Select * from tcatmateria where Lectura=?";
     }//GEN-LAST:event_btnIniciarActionPerformed

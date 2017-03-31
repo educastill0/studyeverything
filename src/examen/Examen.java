@@ -104,20 +104,11 @@ public class Examen {
         // TODO code application logic here
         ArrayList materias = new Examen().getMateria();
         Examen baseDatos = new Examen().conectar();
-        Iterator it = materias.iterator();
-        while(it.hasNext()){
-            Object objeto = it.next();
-            materia materia = (materia)objeto;
-            System.out.println(materia);
-        }
+       
         login l = new login();
         l.setConexion(conexion);
         l.setVisible(true);
     }
-    
-
-
-
 }
 
 
