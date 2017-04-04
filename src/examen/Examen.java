@@ -76,7 +76,7 @@ public class Examen {
         public ArrayList getMateria() {
         ArrayList listaMaterias=new ArrayList();
         try{
-            PreparedStatement consulta = conexion.prepareStatement("Select idmateria,materia from tmaterias order by idmateria");
+            PreparedStatement consulta = conexion.prepareStatement("Select idmateria,materia from tcatmateria order by idmateria");
             ResultSet result;
             result = consulta.executeQuery();
             while(result.next()){
@@ -102,8 +102,19 @@ public class Examen {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ArrayList materias = new Examen().getMateria();
+     
         Examen baseDatos = new Examen().conectar();
+          ArrayList materias = new Examen().getMateria();
+          System.out.println("Select * from tcatmateria");
+          System.out.println("");
+       
+         Iterator it = materias.iterator();
+        while(it.hasNext()){
+            Object objeto = it.next();
+            materia materia = (materia)objeto;
+            System.out.println(materia);
+            System.out.println("");
+        }
        
         login l = new login();
         l.setConexion(conexion);
