@@ -73,7 +73,7 @@ public class Examen {
        return null;
     }  
     
-        public ArrayList getMateria() {
+    public ArrayList getMateria() {
         ArrayList listaMaterias=new ArrayList();
         try{
             PreparedStatement consulta = conexion.prepareStatement("Select idmateria,materia from tcatmateria order by idmateria");
@@ -104,16 +104,14 @@ public class Examen {
         // TODO code application logic here
      
         Examen baseDatos = new Examen().conectar();
-          ArrayList materias = new Examen().getMateria();
-          System.out.println("Select * from tcatmateria");
-          System.out.println("");
+        ArrayList materias = new Examen().getMateria();
+        System.out.println("");
        
          Iterator it = materias.iterator();
         while(it.hasNext()){
             Object objeto = it.next();
-            materia materia = (materia)objeto;
-            System.out.println(materia);
-            System.out.println("");
+            materia m = (materia)objeto;
+            System.out.println("id: " + m.getIdMateria() + " Materia: " + m.getMateria());
         }
        
         login l = new login();
@@ -121,5 +119,3 @@ public class Examen {
         l.setVisible(true);
     }
 }
-
-
