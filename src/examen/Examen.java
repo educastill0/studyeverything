@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package examen;
+
+import clases.*;
 import clases.materia;
 import clases.pregunta;
+import examen.login;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,9 +17,8 @@ import java.util.Iterator;
  *
  * @author SIMGE
  */
-public class Examen {
+public class Examen extends javax.swing.JFrame {
 
-  
    public static Connection conexion;
 
     public Connection getConexion() {
@@ -112,6 +114,8 @@ public class Examen {
             Object objeto = it.next();
             materia m = (materia)objeto;
             System.out.println("id: " + m.getIdMateria() + " Materia: " + m.getMateria());
+          
+            
         }
        
         login l = new login();

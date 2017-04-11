@@ -5,6 +5,7 @@
  */
 package examen;
 
+
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,8 @@ ResultSet rs=null;
                 close();
             }
         });
+    }
+        {
     }
  
     private void close(){
@@ -174,6 +177,7 @@ public void setConexion(Connection conexion) {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

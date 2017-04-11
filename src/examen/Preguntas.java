@@ -5,6 +5,10 @@
  */
 package examen;
 
+import clases.pregunta;
+import clases.*;
+import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +17,20 @@ import javax.swing.JOptionPane;
  */
 public class Preguntas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Preguntas
-     */
     public Preguntas() {
         initComponents();
+        //question.setText(.getPregunta(posicion));
+        String[] a = r.setRespuestas(posicion);
+        buttonGroup1.clearSelection();
+        opc1.setText(a[0]);
+        opc2.setText(a[1]);
+        opc3.setText(a[2]);
+        opc1.requestFocus(false);
+        regresar.setEnabled(false);
+        termina.setEnabled(false);
+        
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
  
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -26,14 +39,25 @@ public class Preguntas extends javax.swing.JFrame {
                 close();
             }
         });
+   
+    
+
     }
- 
+
     private void close(){
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?",
                 "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-            System.exit(0);
+           System.exit(0);
     }
-
+    int posicion = 0;
+    
+    respuestas r = new respuestas();
+    pregunta p = new pregunta();
+    Object[] select ={"","","",""};
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,53 +67,102 @@ public class Preguntas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        btnAnterior = new javax.swing.JButton();
-        btnTerminar = new javax.swing.JButton();
-        btnSiguiente = new javax.swing.JButton();
+        txtMateria = new javax.swing.JLabel();
+        question = new javax.swing.JLabel();
+        txtContador = new javax.swing.JLabel();
+        regresar = new javax.swing.JButton();
+        termina = new javax.swing.JButton();
+        avanzar = new javax.swing.JButton();
+        opc1 = new javax.swing.JRadioButton();
+        opc2 = new javax.swing.JRadioButton();
+        opc3 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("PREGUNTAS");
         setResizable(false);
 
-        jLabel1.setText("MATERIA:");
-        jLabel1.setBorder(new javax.swing.border.MatteBorder(null));
-
-        jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
-
-        jLabel3.setText("PREGUNTA=1/10");
-        jLabel3.setBorder(new javax.swing.border.MatteBorder(null));
-
-        jLabel4.setText("A)");
-
-        jLabel5.setText("B)");
-
-        jLabel6.setText("C)");
-
-        btnAnterior.setText("ANTERIOR");
-        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnteriorActionPerformed(evt);
+        txtMateria.setText("MATERIA:");
+        txtMateria.setBorder(new javax.swing.border.MatteBorder(null));
+        txtMateria.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtMateriaAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        txtMateria.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                txtMateriaComponentHidden(evt);
             }
         });
 
-        btnTerminar.setText("TERMINAR");
-        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerminarActionPerformed(evt);
+        question.setText("¿Pregunta 1?");
+        question.setBorder(new javax.swing.border.MatteBorder(null));
+        question.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                questionAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
-        btnSiguiente.setText("SIGUIENTE");
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        txtContador.setText("PREGUNTA=1/10");
+        txtContador.setBorder(new javax.swing.border.MatteBorder(null));
+        txtContador.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtContadorAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        regresar.setText("<<ANTERIOR");
+        regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
+                regresarActionPerformed(evt);
+            }
+        });
+
+        termina.setText("TERMINAR");
+        termina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminaActionPerformed(evt);
+            }
+        });
+
+        avanzar.setText("SIGUIENTE>>");
+        avanzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                avanzarActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(opc1);
+        opc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(opc2);
+        opc2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(opc3);
+        opc3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc3ActionPerformed(evt);
             }
         });
 
@@ -101,49 +174,47 @@ public class Preguntas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(question, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtContador, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(btnAnterior)))
-                        .addGap(70, 70, 70)
-                        .addComponent(btnTerminar)
+                        .addComponent(regresar)
+                        .addGap(82, 82, 82)
+                        .addComponent(termina)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSiguiente)
-                        .addContainerGap())))
+                        .addComponent(avanzar)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(opc2)
+                            .addComponent(opc1)
+                            .addComponent(opc3))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
-                .addGap(49, 49, 49)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMateria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtContador, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(question, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(opc1)
+                .addGap(18, 18, 18)
+                .addComponent(opc2)
+                .addGap(14, 14, 14)
+                .addComponent(opc3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnterior)
-                    .addComponent(btnTerminar)
-                    .addComponent(btnSiguiente))
+                    .addComponent(regresar)
+                    .addComponent(termina)
+                    .addComponent(avanzar))
                 .addContainerGap())
         );
 
@@ -162,52 +233,96 @@ public class Preguntas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnteriorActionPerformed
-
-    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-        // TODO add your handling code here:
-        int salir;
-
-        salir=JOptionPane.showConfirmDialog(this,"Esta Seguro Que Desea Terminar Ya No Podra Continuar Ni Volver","Desea Terminar El Examen",JOptionPane.OK_OPTION);
-
-        if(salir==0)
-
-        {
-            System.exit(salir);
-
+        if(posicion == 0){
+            regresar.setEnabled(false);
         }
-    }//GEN-LAST:event_btnTerminarActionPerformed
-
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        // TODO add your handling code here:
-        int conpreguntas;
-        conpreguntas=0;
-        int correctas;
-        correctas=0;
-        int incorrectas;
-        incorrectas=0;
         
-
-        
-          int[][] pregunta =new int [conpreguntas][6];
-        boolean op_seleccionada = false;
-        boolean respuest_correcta = false;
-            
-        if(respuest_correcta==op_seleccionada){
-             correctas = correctas+1;
-            
+        if(posicion > -1){
+            posicion--;
+            avanzar.setEnabled(true);
+            question.setText(p.getPregunta(posicion));
+            String[] a = r.setRespuestas(posicion);
+            buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
+            opc1.setText(a[0]);
+            opc2.setText(a[1]);
+            opc3.setText(a[2]);
+            opc1.requestFocus();
         }else{
-             incorrectas = incorrectas+1;
+            Toolkit.getDefaultToolkit().beep();
         }
+    }//GEN-LAST:event_regresarActionPerformed
+
+    private void terminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminaActionPerformed
+        // TODO add your handling code here:
         int calificacion = 0;
         
-        if ( calificacion >= 7){
+        for(int i = 0; i < 5; i++){
+            if(select[i].equals(r.getRespuesta(i))){
+                calificacion = calificacion + 1;
+            }
+        }
         
-                }else{
-                        }
-    }//GEN-LAST:event_btnSiguienteActionPerformed
+        calificacion = calificacion * 2;
+        
+        JOptionPane.showMessageDialog(null, "Tu calificacion es " +  calificacion);
+    }//GEN-LAST:event_terminaActionPerformed
+
+    private void avanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarActionPerformed
+        // TODO add your handling code here:
+       if(posicion == 3){
+            avanzar.setEnabled(false);
+            termina.setEnabled(true);
+        }
+        
+        if(posicion < 5){
+            regresar.setEnabled(true);
+            posicion++;
+            question.setText(p.getPregunta(posicion));
+            String[] a = r.setRespuestas(posicion);
+            buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
+            opc1.setText(a[0]);
+            opc2.setText(a[1]);
+            opc3.setText(a[2]);
+            opc1.requestFocus();
+        }else{
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_avanzarActionPerformed
+
+    private void questionAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_questionAncestorAdded
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_questionAncestorAdded
+
+    private void txtMateriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtMateriaAncestorAdded
+        //String instruccion = "Select * from tcatmateria";
+    }//GEN-LAST:event_txtMateriaAncestorAdded
+
+    private void txtContadorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtContadorAncestorAdded
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtContadorAncestorAdded
+
+    private void txtMateriaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_txtMateriaComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMateriaComponentHidden
+
+    private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
+        // TODO add your handling code here:
+        select[posicion] = opc1.getLabel();
+    }//GEN-LAST:event_opc1ActionPerformed
+
+    private void opc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc2ActionPerformed
+        // TODO add your handling code here:
+         select[posicion] = opc2.getLabel();
+    }//GEN-LAST:event_opc2ActionPerformed
+
+    private void opc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc3ActionPerformed
+        // TODO add your handling code here:
+        select[posicion] = opc3.getLabel();
+    }//GEN-LAST:event_opc3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +350,7 @@ public class Preguntas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Preguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -245,15 +361,16 @@ public class Preguntas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton btnTerminar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton avanzar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton opc1;
+    private javax.swing.JRadioButton opc2;
+    private javax.swing.JRadioButton opc3;
+    private javax.swing.JLabel question;
+    private javax.swing.JButton regresar;
+    private javax.swing.JButton termina;
+    private javax.swing.JLabel txtContador;
+    private javax.swing.JLabel txtMateria;
     // End of variables declaration//GEN-END:variables
 }

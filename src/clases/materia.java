@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package clases;
 
@@ -20,30 +18,36 @@ public class materia {
     }
 
     /**
-     * @return the idmateria
+     * @return the iDmateria
      */
     public int getIdMateria() {
         return idmateria;
+        
     }
 
     /**
-     * @param idmateria the idmateria to set
+     * @param idmateria the iDmateria to set
      */
     public void setIdMateria(int idmateria) {
         this.idmateria = idmateria;
     }
 
     /**
-     * @return the pregunta
+     * @return the iDpregunta
      */
     public String getMateria() {
         return materia;
+        
     }
 
     /**
-     * @param materia the materia to set
+     * @param materia the iDmateria to set
      */
     public void setMateria(String materia) {
         this.materia = materia;
+    }
+
+    public String getPregunta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -82,6 +82,7 @@ ResultSet rs=null;
             }
         });
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("ESTE ES UN PROTOTIPO BASADO PARA PODER AYUDAR\nA LOS JOVENES A ESTUDIAR PARA EL EXAMEN PLANEA\nDE SECUNDARIA & DANDOLES UN JUEGO DE OBSERVACION\nSI TIENE UNA CALIFICACION APROVATORIA EN LAS\nPREGUNTAS \n");
@@ -139,8 +140,9 @@ ResultSet rs=null;
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
+        new Preguntas().setVisible(true);
         this.dispose();
-        //String Sql="Select * from tcatmateria where Lectura=?";
+        String Sql="Select * from tcatmateria where Lectura=?";
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -182,6 +184,8 @@ ResultSet rs=null;
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
