@@ -8,7 +8,6 @@ package examen;
 import clases.pregunta;
 import clases.*;
 import java.awt.Toolkit;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,12 +18,11 @@ public class Preguntas extends javax.swing.JFrame {
 
     public Preguntas() {
         initComponents();
-        question.setText(p.getPregunta(posicion));
-        String[] a = r.setRespuestas(posicion);
         buttonGroup1.clearSelection();
-        opc1.setText(a[0]);
-        opc2.setText(a[1]);
-        opc3.setText(a[2]);
+        question.setText(p.getPregunta(x,1));
+        opc1.setText(p.getPregunta(x, 2));
+        opc2.setText(p.getPregunta(x, 3));
+        opc3.setText(p.getPregunta(x, 4));
         opc1.requestFocus(false);
         regresar.setEnabled(false);
         termina.setEnabled(false);
@@ -49,7 +47,8 @@ public class Preguntas extends javax.swing.JFrame {
                 "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
            System.exit(0);
     }
-    int posicion = 0;
+    int x = 0;
+    int y = 0;
     
     respuestas r = new respuestas();
     pregunta p = new pregunta();
@@ -235,19 +234,17 @@ public class Preguntas extends javax.swing.JFrame {
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
-        if(posicion == 0){
+        if(x == 0){
             regresar.setEnabled(false);
         }
         
-        if(posicion > 0){
-            posicion--;
+        if(x > 0){
+            x--;
             avanzar.setEnabled(true);
-            question.setText(p.getPregunta(posicion));
-            String[] a = r.setRespuestas(posicion);
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
-            opc1.setText(a[0]);
-            opc2.setText(a[1]);
-            opc3.setText(a[2]);
+            opc1.setText(p.getPregunta(x, 2));
+            opc2.setText(p.getPregunta(x, 3));
+            opc3.setText(p.getPregunta(x, 4));
             opc1.requestFocus();
         }else{
             Toolkit.getDefaultToolkit().beep();
@@ -279,20 +276,19 @@ public class Preguntas extends javax.swing.JFrame {
 
     private void avanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarActionPerformed
         // TODO add your handling code here:
-       if(posicion == 13){
+       if(x == 13){
             avanzar.setEnabled(false);
             termina.setEnabled(true);
         }
         
-        if(posicion < 13){
+        if(x < 13){
             regresar.setEnabled(true);
-            posicion++;
-            question.setText(p.getPregunta(posicion));
-            String[] a = r.setRespuestas(posicion);
+            x++;
+            question.setText(p.getPregunta(x,1));
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
-            opc1.setText(a[0]);
-            opc2.setText(a[1]);
-            opc3.setText(a[2]);
+            opc1.setText(p.getPregunta(x,2));
+            opc2.setText(p.getPregunta(x,3));
+            opc3.setText(p.getPregunta(x,4));
             opc1.requestFocus();
         }else{
             Toolkit.getDefaultToolkit().beep();
@@ -319,17 +315,17 @@ public class Preguntas extends javax.swing.JFrame {
 
     private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
         // TODO add your handling code here:
-        select[posicion] = opc1.getLabel();
+        select[x] = opc1.getLabel();
     }//GEN-LAST:event_opc1ActionPerformed
 
     private void opc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc2ActionPerformed
         // TODO add your handling code here:
-         select[posicion] = opc2.getLabel();
+         select[x] = opc2.getLabel();
     }//GEN-LAST:event_opc2ActionPerformed
 
     private void opc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc3ActionPerformed
         // TODO add your handling code here:
-        select[posicion] = opc3.getLabel();
+        select[x] = opc3.getLabel();
     }//GEN-LAST:event_opc3ActionPerformed
 
     /**
