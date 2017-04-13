@@ -100,15 +100,15 @@ public class Examen extends javax.swing.JFrame {
     } 
     
     public String[] getPreguntass() {
-        String[] listaPreguntas={};
+        String[ ] listaPreguntas = new String[15];
         try{
             PreparedStatement consulta = conexion.prepareStatement("select pregunta from tpreguntas order by idpregunta");
             ResultSet result;
             result = consulta.executeQuery();
             int count = 0;
             while(result.next()){
-                //listaPreguntas[count] = result.getString("pregunta");
-                System.out.println(listaPreguntas[count]);
+                listaPreguntas[count] = result.getString("pregunta");
+                //System.out.println(listaPreguntas[count]);
                 count++;
             }
             return listaPreguntas;
@@ -126,10 +126,17 @@ public class Examen extends javax.swing.JFrame {
         // TODO code application logic here
      
         Examen baseDatos = new Examen().conectar();
+        String[] pregunta = new Examen().getPreguntass();
+       
+        //int lon = pregunta.length;
+        
+        //System.out.println("preguntas: " + lon);
+        
+        /*
         ArrayList materias = new Examen().getMateria();
         System.out.println("");
        
-         Iterator it = materias.iterator();
+        Iterator it = materias.iterator();
         while(it.hasNext()){
             Object objeto = it.next();
             materia m = (materia)objeto;
@@ -137,7 +144,7 @@ public class Examen extends javax.swing.JFrame {
           
             
         }
-       
+       */
         login l = new login();
         l.setConexion(conexion);
         l.setVisible(true);
