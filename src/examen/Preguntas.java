@@ -53,7 +53,7 @@ public class Preguntas extends javax.swing.JFrame {
     
     respuestas r = new respuestas();
     pregunta p = new pregunta();
-    Object[] select ={"","","",""};
+    Object[] select ={"","","","",""};
     
     
     
