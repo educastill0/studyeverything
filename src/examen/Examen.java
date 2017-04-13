@@ -5,13 +5,9 @@
  */
 package examen;
 
-import clases.*;
 import clases.materia;
-import clases.pregunta;
-import examen.login;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -46,35 +42,7 @@ public class Examen extends javax.swing.JFrame {
 
         return this;
     }
-
-    public ArrayList getPregunta(int idmateria) {
-        ArrayList listaPreguntas=new ArrayList();
-        try{
-            PreparedStatement consulta1 = conexion.prepareStatement("select idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta from tpreguntas where idmateria = " + idmateria + "order by rand()");
-            ResultSet result1;
-            result1 = consulta1.executeQuery();
-            while(result1.next()){
-                int idpregunta = result1.getInt("idpregunta");
-                String pregunta = result1.getString("pregunta");
-                String respuesta_a = result1.getString("respuesta_a");
-                String respuesta_b = result1.getString("respuesta_b");
-                String respuesta_c = result1.getString("respuesta_c");
-                String respuesta_correcta = result1.getString("respuesta_correcta");
-
-                //Creas un objeto del tipo que te estas trayendo de la bd, en mi caso, un objeto Persona
-
-                pregunta x = new pregunta(idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta);//le mandas los parametros necesarios al constructor del Bean Persona. 
-
-                listaPreguntas.add(x); //agregas ese objeto a la lista
-            }
-            return listaPreguntas;
-        }catch(SQLException e){
-            System.out.println("Ocurrio la siguiente excepcion : " + e.toString());
-            System.out.close();
-        }
-       return null;
-    }  
-    
+ 
     public ArrayList getMateria() {
         ArrayList listaMaterias=new ArrayList();
         try{
@@ -99,16 +67,20 @@ public class Examen extends javax.swing.JFrame {
        return null;
     } 
     
-    public String[] getPreguntass() {
-        String[ ] listaPreguntas = new String[15];
+    public String[][] getPreguntas() {
+        String[ ][ ] listaPreguntas = new String[15][6];
         try{
-            PreparedStatement consulta = conexion.prepareStatement("select pregunta from tpreguntas order by idpregunta");
+            PreparedStatement consulta = conexion.prepareStatement("select idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta from tpreguntas order by idpregunta");
             ResultSet result;
             result = consulta.executeQuery();
             int count = 0;
             while(result.next()){
-                listaPreguntas[count] = result.getString("pregunta");
-                //System.out.println(listaPreguntas[count]);
+                listaPreguntas[count][0] = result.getString("idpregunta");
+                listaPreguntas[count][1] = result.getString("pregunta");
+                listaPreguntas[count][2] = result.getString("respuesta_a");
+                listaPreguntas[count][3] = result.getString("respuesta_b");
+                listaPreguntas[count][4] = result.getString("respuesta_c");
+                listaPreguntas[count][5] = result.getString("respuesta_correcta");
                 count++;
             }
             return listaPreguntas;
@@ -126,12 +98,13 @@ public class Examen extends javax.swing.JFrame {
         // TODO code application logic here
      
         Examen baseDatos = new Examen().conectar();
-        String[] pregunta = new Examen().getPreguntass();
+        /*
+        String[][] pregunta = new Examen().getPreguntass();
        
-        //int lon = pregunta.length;
+        int lon = pregunta.length;
         
-        //System.out.println("preguntas: " + lon);
-        
+        System.out.println("preguntas: " + lon);
+        */
         /*
         ArrayList materias = new Examen().getMateria();
         System.out.println("");

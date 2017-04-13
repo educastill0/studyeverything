@@ -27,8 +27,6 @@ public class Preguntas extends javax.swing.JFrame {
         regresar.setEnabled(false);
         termina.setEnabled(false);
         
-        
-        
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
  
         addWindowListener(new java.awt.event.WindowAdapter() {
