@@ -99,6 +99,26 @@ public class Examen extends javax.swing.JFrame {
        return null;
     } 
     
+    public String[] getPreguntass() {
+        String[] listaPreguntas={};
+        try{
+            PreparedStatement consulta = conexion.prepareStatement("select pregunta from tpreguntas order by idpregunta");
+            ResultSet result;
+            result = consulta.executeQuery();
+            int count = 0;
+            while(result.next()){
+                //listaPreguntas[count] = result.getString("pregunta");
+                System.out.println(listaPreguntas[count]);
+                count++;
+            }
+            return listaPreguntas;
+        }catch(SQLException e){
+            System.out.println("Ocurrio la siguiente excepcion : " + e.toString());
+            System.out.close();
+        }
+       return null;
+    } 
+    
     /**
      * @param args the command line arguments
      */
