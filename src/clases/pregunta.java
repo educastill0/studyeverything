@@ -3,8 +3,8 @@ package clases;
 
 public class pregunta {
     String[] pregunta = {
-        "¿Pregunta 1?", "¿Pregunta 2?", "¿Pregunta 3?",
-        "¿Pregunta 4?", "¿Pregunta 5?"
+        "¿La Suma De Las Estructuras De Rosa,Juliq Y Lucero Es De 4.5M?", "¿Un Rectangulo Tiene Un Area De 257.2500 m2?", "¿Ana,Juan y Andrea Aportaron Respectivamente $20,$30 y $50 Para ?",
+        "¿Cuanto Es 23+12*2-21?", "¿Pregunta 5?", "¿Pregunta 6?", "¿Pregunta 7?", "¿Pregunta 8?", "¿Pregunta 9?", "¿Pregunta 10?", "¿Pregunta 11?", "¿Pregunta 12?", "¿Pregunta 13?", "¿Pregunta 14?"
     };
 
     public String getPregunta(int posicion){

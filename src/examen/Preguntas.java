@@ -19,7 +19,7 @@ public class Preguntas extends javax.swing.JFrame {
 
     public Preguntas() {
         initComponents();
-        //question.setText(.getPregunta(posicion));
+        question.setText(p.getPregunta(posicion));
         String[] a = r.setRespuestas(posicion);
         buttonGroup1.clearSelection();
         opc1.setText(a[0]);
@@ -53,7 +53,7 @@ public class Preguntas extends javax.swing.JFrame {
     
     respuestas r = new respuestas();
     pregunta p = new pregunta();
-    Object[] select ={"","","","",""};
+    Object[] select ={"","","","","","","","","","","","","",""};
     
     
     
@@ -239,7 +239,7 @@ public class Preguntas extends javax.swing.JFrame {
             regresar.setEnabled(false);
         }
         
-        if(posicion > -1){
+        if(posicion > 0){
             posicion--;
             avanzar.setEnabled(true);
             question.setText(p.getPregunta(posicion));
@@ -256,27 +256,35 @@ public class Preguntas extends javax.swing.JFrame {
 
     private void terminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminaActionPerformed
         // TODO add your handling code here:
-        int calificacion = 0;
+        double correctas = 0;
+        double incorrectas = 0;
         
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 13; i++){
             if(select[i].equals(r.getRespuesta(i))){
-                calificacion = calificacion + 1;
+                correctas = correctas + 1.5;
+            }else{
+                incorrectas = incorrectas + 1.5;
+            }
+            if(correctas>=7){
+                new juego().setVisible(true);
+                this.dispose();
+            }else{
             }
         }
         
-        calificacion = calificacion * 2;
+        correctas = correctas /2;
         
-        JOptionPane.showMessageDialog(null, "Tu calificacion es " +  calificacion);
+        JOptionPane.showMessageDialog(null, "Tu calificacion es " +  correctas);
     }//GEN-LAST:event_terminaActionPerformed
 
     private void avanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarActionPerformed
         // TODO add your handling code here:
-       if(posicion == 3){
+       if(posicion == 13){
             avanzar.setEnabled(false);
             termina.setEnabled(true);
         }
         
-        if(posicion < 5){
+        if(posicion < 13){
             regresar.setEnabled(true);
             posicion++;
             question.setText(p.getPregunta(posicion));
