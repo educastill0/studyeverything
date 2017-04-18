@@ -8,6 +8,7 @@ package examen;
 import clases.pregunta;
 import clases.*;
 import java.awt.Toolkit;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,9 @@ public class Preguntas extends javax.swing.JFrame {
     public Preguntas() {
         initComponents();
         buttonGroup1.clearSelection();
+        Contador.setText(p.getPregunta(x,y));
+        String getMateria = null;
+        Materia.setText(p.getMateria(x, 1));
         question.setText(p.getPregunta(x,1));
         opc1.setText(p.getPregunta(x, 2));
         opc2.setText(p.getPregunta(x, 3));
@@ -48,9 +52,10 @@ public class Preguntas extends javax.swing.JFrame {
     int x = 0;
     int y = 0;
     
+    
     respuestas r = new respuestas();
     pregunta p = new pregunta();
-    Object[] select ={"","","","","","","","","","","","","",""};
+    Object[] select ={"","","","","","","","","","","","","","",""};
     
     
     
@@ -66,9 +71,9 @@ public class Preguntas extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        txtMateria = new javax.swing.JLabel();
+        Materia = new javax.swing.JLabel();
         question = new javax.swing.JLabel();
-        txtContador = new javax.swing.JLabel();
+        Contador = new javax.swing.JLabel();
         regresar = new javax.swing.JButton();
         termina = new javax.swing.JButton();
         avanzar = new javax.swing.JButton();
@@ -80,25 +85,28 @@ public class Preguntas extends javax.swing.JFrame {
         setTitle("PREGUNTAS");
         setResizable(false);
 
-        txtMateria.setText("MATERIA:");
-        txtMateria.setBorder(new javax.swing.border.MatteBorder(null));
-        txtMateria.addAncestorListener(new javax.swing.event.AncestorListener() {
+        Materia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Materia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Materia.setText("MATERIA:");
+        Materia.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        Materia.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                txtMateriaAncestorAdded(evt);
+                MateriaAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        txtMateria.addComponentListener(new java.awt.event.ComponentAdapter() {
+        Materia.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
-                txtMateriaComponentHidden(evt);
+                MateriaComponentHidden(evt);
             }
         });
 
+        question.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         question.setText("¿Pregunta 1?");
-        question.setBorder(new javax.swing.border.MatteBorder(null));
+        question.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         question.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 questionAncestorAdded(evt);
@@ -109,11 +117,13 @@ public class Preguntas extends javax.swing.JFrame {
             }
         });
 
-        txtContador.setText("PREGUNTA=1/10");
-        txtContador.setBorder(new javax.swing.border.MatteBorder(null));
-        txtContador.addAncestorListener(new javax.swing.event.AncestorListener() {
+        Contador.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Contador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Contador.setText("PREGUNTA=1/10");
+        Contador.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        Contador.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                txtContadorAncestorAdded(evt);
+                ContadorAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -143,6 +153,7 @@ public class Preguntas extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(opc1);
+        opc1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         opc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opc1ActionPerformed(evt);
@@ -150,6 +161,7 @@ public class Preguntas extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(opc2);
+        opc2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         opc2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opc2ActionPerformed(evt);
@@ -157,6 +169,7 @@ public class Preguntas extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(opc3);
+        opc3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         opc3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opc3ActionPerformed(evt);
@@ -171,34 +184,33 @@ public class Preguntas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(question, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
-                        .addComponent(txtContador, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(regresar)
-                        .addGap(82, 82, 82)
-                        .addComponent(termina)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(avanzar)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(opc2)
                             .addComponent(opc1)
                             .addComponent(opc3))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(question, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Materia, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
+                                .addComponent(Contador, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(regresar)
+                                .addGap(82, 82, 82)
+                                .addComponent(termina)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(avanzar)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMateria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtContador, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                    .addComponent(Materia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Contador, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(question, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -239,6 +251,9 @@ public class Preguntas extends javax.swing.JFrame {
         if(x > 0){
             x--;
             avanzar.setEnabled(true);
+            Contador.setText(p.getPregunta(x,y));
+            String getMateria = null;
+            Materia.setText(getMateria);
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
             opc1.setText(p.getPregunta(x, 2));
             opc2.setText(p.getPregunta(x, 3));
@@ -250,39 +265,42 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarActionPerformed
 
     private void terminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminaActionPerformed
-        // TODO add your handling code here:
-        double correctas = 0;
-        double incorrectas = 0;
+        double respuesta_correctas = x;
+        double incorrectas = y;
         
         for(int i = 0; i < 13; i++){
             if(select[i].equals(r.getRespuesta(i))){
-                correctas = correctas + 1.5;
+                respuesta_correctas = respuesta_correctas + 1.5;
             }else{
                 incorrectas = incorrectas + 1.5;
             }
-            if(correctas>=7){
+            if(respuesta_correctas>=7){
                 new juego().setVisible(true);
                 this.dispose();
             }else{
             }
         }
         
-        correctas = correctas /2;
+        respuesta_correctas = respuesta_correctas /2;
         
-        JOptionPane.showMessageDialog(null, "Tu calificacion es " +  correctas);
+        JOptionPane.showMessageDialog(null, "Tu calificacion es " +  respuesta_correctas);
+        JOptionPane.showMessageDialog(null, "Tu Resouestas Incorrectas Fueron" + incorrectas);
     }//GEN-LAST:event_terminaActionPerformed
 
     private void avanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarActionPerformed
         // TODO add your handling code here:
-       if(x == 13){
+       if(x == 14){
             avanzar.setEnabled(false);
             termina.setEnabled(true);
         }
         
-        if(x < 13){
+        if(x < 14){
             regresar.setEnabled(true);
             x++;
             question.setText(p.getPregunta(x,1));
+            Contador.setText(p.getPregunta(x, y));
+            String getMateria = null;
+            Materia.setText(getMateria);
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
             opc1.setText(p.getPregunta(x,2));
             opc2.setText(p.getPregunta(x,3));
@@ -298,18 +316,17 @@ public class Preguntas extends javax.swing.JFrame {
          
     }//GEN-LAST:event_questionAncestorAdded
 
-    private void txtMateriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtMateriaAncestorAdded
-        //String instruccion = "Select * from tcatmateria";
-    }//GEN-LAST:event_txtMateriaAncestorAdded
+    private void MateriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_MateriaAncestorAdded
+        String instruccion = "Select * from tcatmateria";
+    }//GEN-LAST:event_MateriaAncestorAdded
 
-    private void txtContadorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtContadorAncestorAdded
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtContadorAncestorAdded
+    private void ContadorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ContadorAncestorAdded
+           
+    }//GEN-LAST:event_ContadorAncestorAdded
 
-    private void txtMateriaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_txtMateriaComponentHidden
+    private void MateriaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_MateriaComponentHidden
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMateriaComponentHidden
+    }//GEN-LAST:event_MateriaComponentHidden
 
     private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
         // TODO add your handling code here:
@@ -363,6 +380,8 @@ public class Preguntas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Contador;
+    private javax.swing.JLabel Materia;
     private javax.swing.JButton avanzar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
@@ -372,7 +391,5 @@ public class Preguntas extends javax.swing.JFrame {
     private javax.swing.JLabel question;
     private javax.swing.JButton regresar;
     private javax.swing.JButton termina;
-    private javax.swing.JLabel txtContador;
-    private javax.swing.JLabel txtMateria;
     // End of variables declaration//GEN-END:variables
 }

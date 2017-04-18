@@ -11,6 +11,8 @@ public class materia {
 
     private int idmateria;
     private String materia;
+     //Materia.setText(getMateria);
+       
 
     public materia(int idmateria, String materia) {
         this.idmateria = idmateria;
@@ -45,9 +47,5 @@ public class materia {
      */
     public void setMateria(String materia) {
         this.materia = materia;
-    }
-
-    public String getPregunta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
