@@ -40,8 +40,9 @@ public class Preguntas extends javax.swing.JFrame {
     }
     int x = 0;
     int y = 0;
-    Object[] select;
     
+    String[][] respuesta;
+    String[][] pregunta = new Examen().getPreguntas();
     materia m = new materia();
     pregunta p = new pregunta();
     
@@ -250,17 +251,17 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarActionPerformed
 
     private void terminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminaActionPerformed
-        int respuesta_correctas = x;
-        int incorrectas = y;
+        int respuesta_correctas = 0;
+        int incorrectas = 0;
         
         for(int i = 0; i < 15; i++){
             
-            if(select[i].equals(p.getPregunta(i,5))){
-                incorrectas = incorrectas + 1;
-            }else{
+            if(pregunta[i].equals(p.getPregunta(i,5))){
                 respuesta_correctas = respuesta_correctas + 1;
+            }else{
+                incorrectas = incorrectas + 1;
             }
-            if(respuesta_correctas>=7){
+            if(respuesta_correctas>=6){
                 new juego().setVisible(true);
                 this.dispose();
             }else{
@@ -314,7 +315,7 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_MateriaComponentHidden
 
     private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
-       opc1.getLabel();
+     opc1.getLabel();
     }//GEN-LAST:event_opc1ActionPerformed
 
     private void opc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc2ActionPerformed
