@@ -1,17 +1,24 @@
-/*
- * 
- */
 package clases;
 
-/**
- *
- * @author SIMGE
- */
+import examen.Examen;
+import java.util.ArrayList;
+
 public class materia {
 
     private int idmateria;
     private String materia;
-     //Materia.setText(getMateria);
+ 
+    //Examen baseDatos = new Examen().conectar();
+    String[][] Materia = new Examen().getMateria();
+    public String getMateria;
+
+    public materia() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String getMateria(int x,int y){
+        return Materia [x][y];
+    }
        
 
     public materia(int idmateria, String materia) {
@@ -19,33 +26,25 @@ public class materia {
         this.materia = materia;
     }
 
-    /**
-     * @return the iDmateria
-     */
     public int getIdMateria() {
         return idmateria;
         
     }
 
-    /**
-     * @param idmateria the iDmateria to set
-     */
     public void setIdMateria(int idmateria) {
         this.idmateria = idmateria;
     }
 
-    /**
-     * @return the iDpregunta
-     */
     public String getMateria() {
         return materia;
         
     }
 
-    /**
-     * @param materia the iDmateria to set
-     */
     public void setMateria(String materia) {
         this.materia = materia;
+    }
+
+    private String Materia(int posicion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package examen;
 
 import clases.materia;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author SIMGE
- */
 public class Examen extends javax.swing.JFrame {
 
    public static Connection conexion;
@@ -43,21 +34,19 @@ public class Examen extends javax.swing.JFrame {
         return this;
     }
  
-    public ArrayList getMateria() {
-        ArrayList listaMaterias=new ArrayList();
+    public String[][] getMateria() {
+        String[][] listaMaterias=new String[15][2];
         try{
             PreparedStatement consulta = conexion.prepareStatement("Select idmateria,materia from tcatmateria order by idmateria");
             ResultSet result;
             result = consulta.executeQuery();
+            int count = 0;
             while(result.next()){
-                int idmateria = result.getInt("idmateria");
-                String materia = result.getString("materia");
-
+                listaMaterias[count][0] = result.getString("idmateria");
+                listaMaterias[count][1] = result.getString("materia");
+                count++;
+                
                 //Creas un objeto del tipo que te estas trayendo de la bd, en mi caso, un objeto Persona
-
-                materia x = new materia(idmateria,materia);//le mandas los parametros necesarios al constructor del Bean Persona. 
-
-                listaMaterias.add(x); //agregas ese objeto a la lista
             }
             return listaMaterias;
         }catch(SQLException e){
@@ -70,7 +59,7 @@ public class Examen extends javax.swing.JFrame {
     public String[][] getPreguntas() {
         String[ ][ ] listaPreguntas = new String[15][6];
         try{
-            PreparedStatement consulta = conexion.prepareStatement("select idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta from tpreguntas order by idpregunta");
+            PreparedStatement consulta = conexion.prepareStatement("select idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta from tpreguntas order by idmateria");
             ResultSet result;
             result = consulta.executeQuery();
             int count = 0;

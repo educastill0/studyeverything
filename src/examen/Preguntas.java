@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package examen;
 
 import clases.pregunta;
@@ -11,22 +6,18 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author jerso
- */
 public class Preguntas extends javax.swing.JFrame {
-
+    
     public Preguntas() {
         initComponents();
         buttonGroup1.clearSelection();
         Contador.setText(p.getPregunta(x,y));
-        String getMateria = null;
-        Materia.setText(p.getMateria(x, 1));
+        Materia.setText(m.getMateria(x,1));
         question.setText(p.getPregunta(x,1));
         opc1.setText(p.getPregunta(x, 2));
         opc2.setText(p.getPregunta(x, 3));
         opc3.setText(p.getPregunta(x, 4));
+        String respuesta = p.getPregunta(x,5);
         opc1.requestFocus(false);
         regresar.setEnabled(false);
         termina.setEnabled(false);
@@ -39,8 +30,6 @@ public class Preguntas extends javax.swing.JFrame {
                 close();
             }
         });
-   
-    
 
     }
 
@@ -51,14 +40,10 @@ public class Preguntas extends javax.swing.JFrame {
     }
     int x = 0;
     int y = 0;
+    Object[] select;
     
-    
-    respuestas r = new respuestas();
+    materia m = new materia();
     pregunta p = new pregunta();
-    Object[] select ={"","","","","","","","","","","","","","",""};
-    
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,12 +75,12 @@ public class Preguntas extends javax.swing.JFrame {
         Materia.setText("MATERIA:");
         Materia.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         Materia.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 MateriaAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         Materia.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -108,12 +93,12 @@ public class Preguntas extends javax.swing.JFrame {
         question.setText("¿Pregunta 1?");
         question.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         question.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 questionAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -122,12 +107,12 @@ public class Preguntas extends javax.swing.JFrame {
         Contador.setText("PREGUNTA=1/10");
         Contador.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         Contador.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 ContadorAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -251,9 +236,9 @@ public class Preguntas extends javax.swing.JFrame {
         if(x > 0){
             x--;
             avanzar.setEnabled(true);
+            String respuesta = p.getPregunta(x,5);
             Contador.setText(p.getPregunta(x,y));
-            String getMateria = null;
-            Materia.setText(getMateria);
+            Materia.setText(m.getMateria(x,1));
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
             opc1.setText(p.getPregunta(x, 2));
             opc2.setText(p.getPregunta(x, 3));
@@ -265,14 +250,15 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarActionPerformed
 
     private void terminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminaActionPerformed
-        double respuesta_correctas = x;
-        double incorrectas = y;
+        int respuesta_correctas = x;
+        int incorrectas = y;
         
-        for(int i = 0; i < 13; i++){
-            if(select[i].equals(r.getRespuesta(i))){
-                respuesta_correctas = respuesta_correctas + 1.5;
+        for(int i = 0; i < 15; i++){
+            
+            if(select[i].equals(p.getPregunta(i,5))){
+                incorrectas = incorrectas + 1;
             }else{
-                incorrectas = incorrectas + 1.5;
+                respuesta_correctas = respuesta_correctas + 1;
             }
             if(respuesta_correctas>=7){
                 new juego().setVisible(true);
@@ -284,7 +270,7 @@ public class Preguntas extends javax.swing.JFrame {
         respuesta_correctas = respuesta_correctas /2;
         
         JOptionPane.showMessageDialog(null, "Tu calificacion es " +  respuesta_correctas);
-        JOptionPane.showMessageDialog(null, "Tu Resouestas Incorrectas Fueron" + incorrectas);
+        //JOptionPane.showMessageDialog(null, "Tu Respuestas Incorrectas Fueron" + incorrectas);
     }//GEN-LAST:event_terminaActionPerformed
 
     private void avanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarActionPerformed
@@ -293,14 +279,14 @@ public class Preguntas extends javax.swing.JFrame {
             avanzar.setEnabled(false);
             termina.setEnabled(true);
         }
-        
+       
         if(x < 14){
             regresar.setEnabled(true);
             x++;
+            String respuesta = p.getPregunta(x,5);
             question.setText(p.getPregunta(x,1));
             Contador.setText(p.getPregunta(x, y));
-            String getMateria = null;
-            Materia.setText(getMateria);
+            Materia.setText(m.getMateria(x,1));
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
             opc1.setText(p.getPregunta(x,2));
             opc2.setText(p.getPregunta(x,3));
@@ -312,35 +298,31 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_avanzarActionPerformed
 
     private void questionAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_questionAncestorAdded
-        // TODO add your handling code here:
-         
+     
     }//GEN-LAST:event_questionAncestorAdded
 
     private void MateriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_MateriaAncestorAdded
-        String instruccion = "Select * from tcatmateria";
+        
     }//GEN-LAST:event_MateriaAncestorAdded
 
     private void ContadorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ContadorAncestorAdded
-           
+     
     }//GEN-LAST:event_ContadorAncestorAdded
 
     private void MateriaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_MateriaComponentHidden
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_MateriaComponentHidden
 
     private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
-        // TODO add your handling code here:
-        select[x] = opc1.getLabel();
+       opc1.getLabel();
     }//GEN-LAST:event_opc1ActionPerformed
 
     private void opc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc2ActionPerformed
-        // TODO add your handling code here:
-         select[x] = opc2.getLabel();
+      opc2.getLabel();
     }//GEN-LAST:event_opc2ActionPerformed
 
     private void opc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc3ActionPerformed
-        // TODO add your handling code here:
-        select[x] = opc3.getLabel();
+     opc3.getLabel();
     }//GEN-LAST:event_opc3ActionPerformed
 
     /**
@@ -370,6 +352,8 @@ public class Preguntas extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -392,4 +376,10 @@ public class Preguntas extends javax.swing.JFrame {
     private javax.swing.JButton regresar;
     private javax.swing.JButton termina;
     // End of variables declaration//GEN-END:variables
+
+    private static class select {
+
+        public select() {
+        }
+    }
 }
