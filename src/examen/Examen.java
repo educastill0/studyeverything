@@ -1,6 +1,6 @@
 package examen;
 
-import clases.materia;
+import clases.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -33,33 +33,11 @@ public class Examen extends javax.swing.JFrame {
 
         return this;
     }
- 
-    public String[][] getMateria() {
-        String[][] listaMaterias=new String[15][2];
-        try{
-            PreparedStatement consulta = conexion.prepareStatement("Select idmateria,materia from tcatmateria order by idmateria");
-            ResultSet result;
-            result = consulta.executeQuery();
-            int count = 0;
-            while(result.next()){
-                listaMaterias[count][0] = result.getString("idmateria");
-                listaMaterias[count][1] = result.getString("materia");
-                count++;
-                
-                //Creas un objeto del tipo que te estas trayendo de la bd, en mi caso, un objeto Persona
-            }
-            return listaMaterias;
-        }catch(SQLException e){
-            System.out.println("Ocurrio la siguiente excepcion : " + e.toString());
-            System.out.close();
-        }
-       return null;
-    } 
-    
+
     public String[][] getPreguntas() {
-        String[ ][ ] listaPreguntas = new String[15][6];
+        String[ ][ ] listaPreguntas = new String[15][7];
         try{
-            PreparedStatement consulta = conexion.prepareStatement("select idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta from tpreguntas order by idmateria");
+            PreparedStatement consulta = conexion.prepareStatement("select idpregunta,pregunta,respuesta_a,respuesta_b,respuesta_c,respuesta_correcta,materia from tpreguntas order by idpregunta");
             ResultSet result;
             result = consulta.executeQuery();
             int count = 0;
@@ -70,6 +48,7 @@ public class Examen extends javax.swing.JFrame {
                 listaPreguntas[count][3] = result.getString("respuesta_b");
                 listaPreguntas[count][4] = result.getString("respuesta_c");
                 listaPreguntas[count][5] = result.getString("respuesta_correcta");
+                listaPreguntas[count][6] = result.getString("materia");
                 count++;
             }
             return listaPreguntas;

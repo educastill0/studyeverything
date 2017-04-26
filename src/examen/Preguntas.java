@@ -10,9 +10,10 @@ public class Preguntas extends javax.swing.JFrame {
     
     public Preguntas() {
         initComponents();
+        String[] a = r.setRespuestas(posicion);
         buttonGroup1.clearSelection();
+        Materia.setText(p.getPregunta(x,6));
         Contador.setText(p.getPregunta(x,y));
-        Materia.setText(m.getMateria(x,1));
         question.setText(p.getPregunta(x,1));
         opc1.setText(p.getPregunta(x, 2));
         opc2.setText(p.getPregunta(x, 3));
@@ -21,7 +22,7 @@ public class Preguntas extends javax.swing.JFrame {
         opc1.requestFocus(false);
         regresar.setEnabled(false);
         termina.setEnabled(false);
-        
+        Juego.setEnabled(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
  
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -41,9 +42,10 @@ public class Preguntas extends javax.swing.JFrame {
     int x = 0;
     int y = 0;
     
-    String[][] respuesta;
-    String[][] pregunta = new Examen().getPreguntas();
-    materia m = new materia();
+    Object[] select = {"","","","","","","","","","","","","","",""};
+    
+    int posicion = 0;
+    respuestas r = new respuestas();
     pregunta p = new pregunta();
     
     /**
@@ -66,10 +68,13 @@ public class Preguntas extends javax.swing.JFrame {
         opc1 = new javax.swing.JRadioButton();
         opc2 = new javax.swing.JRadioButton();
         opc3 = new javax.swing.JRadioButton();
+        Juego = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("PREGUNTAS");
         setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
         Materia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Materia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -90,6 +95,7 @@ public class Preguntas extends javax.swing.JFrame {
             }
         });
 
+        question.setBackground(new java.awt.Color(255, 255, 255));
         question.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         question.setText("¿Pregunta 1?");
         question.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
@@ -162,6 +168,13 @@ public class Preguntas extends javax.swing.JFrame {
             }
         });
 
+        Juego.setText("Juego");
+        Juego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JuegoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,6 +199,8 @@ public class Preguntas extends javax.swing.JFrame {
                                 .addComponent(regresar)
                                 .addGap(82, 82, 82)
                                 .addComponent(termina)
+                                .addGap(119, 119, 119)
+                                .addComponent(Juego)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(avanzar)))
                         .addContainerGap())))
@@ -209,7 +224,8 @@ public class Preguntas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regresar)
                     .addComponent(termina)
-                    .addComponent(avanzar))
+                    .addComponent(avanzar)
+                    .addComponent(Juego))
                 .addContainerGap())
         );
 
@@ -237,9 +253,11 @@ public class Preguntas extends javax.swing.JFrame {
         if(x > 0){
             x--;
             avanzar.setEnabled(true);
-            String respuesta = p.getPregunta(x,5);
+            Juego.setEnabled(false);
+            Materia.setText(p.getPregunta(x,6));
+            String[] a = r.setRespuestas(posicion);
+           // String respuesta = p.getPregunta(x,5);
             Contador.setText(p.getPregunta(x,y));
-            Materia.setText(m.getMateria(x,1));
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
             opc1.setText(p.getPregunta(x, 2));
             opc2.setText(p.getPregunta(x, 3));
@@ -251,27 +269,28 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarActionPerformed
 
     private void terminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminaActionPerformed
-        int respuesta_correctas = 0;
-        int incorrectas = 0;
+        double respuesta_correctas = 0;
+        int incorrectas = y;
+        Juego.setEnabled(true);
         
         for(int i = 0; i < 15; i++){
             
-            if(pregunta[i].equals(p.getPregunta(i,5))){
-                respuesta_correctas = respuesta_correctas + 1;
+            if(select[i].equals(r.getRespuesta(i))){
+                respuesta_correctas = respuesta_correctas + 1.5;
+                Juego.setEnabled(true);
             }else{
                 incorrectas = incorrectas + 1;
             }
-            if(respuesta_correctas>=6){
-                new juego().setVisible(true);
-                this.dispose();
+            if(respuesta_correctas>=7){
+                Juego.setEnabled(true);
             }else{
             }
         }
         
         respuesta_correctas = respuesta_correctas /2;
         
-        JOptionPane.showMessageDialog(null, "Tu calificacion es " +  respuesta_correctas);
-        //JOptionPane.showMessageDialog(null, "Tu Respuestas Incorrectas Fueron" + incorrectas);
+          JOptionPane.showMessageDialog(null, "Tu calificacion es " +  respuesta_correctas);
+          JOptionPane.showMessageDialog(null, "Tu Respuestas Incorrectas Fueron " + incorrectas);
     }//GEN-LAST:event_terminaActionPerformed
 
     private void avanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarActionPerformed
@@ -284,10 +303,12 @@ public class Preguntas extends javax.swing.JFrame {
         if(x < 14){
             regresar.setEnabled(true);
             x++;
-            String respuesta = p.getPregunta(x,5);
+            Juego.setEnabled(false);
+            Materia.setText(p.getPregunta(x,6));
+            //String respuesta = p.getPregunta(x,5);
+            String[] a = r.setRespuestas(posicion);
             question.setText(p.getPregunta(x,1));
             Contador.setText(p.getPregunta(x, y));
-            Materia.setText(m.getMateria(x,1));
             buttonGroup1.clearSelection(); // sirve para borrar las selecciones de los radio button
             opc1.setText(p.getPregunta(x,2));
             opc2.setText(p.getPregunta(x,3));
@@ -315,16 +336,21 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_MateriaComponentHidden
 
     private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
-     opc1.getLabel();
+     select [x] = opc1.getLabel();
     }//GEN-LAST:event_opc1ActionPerformed
 
     private void opc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc2ActionPerformed
-      opc2.getLabel();
+     select [x] = opc2.getLabel();
     }//GEN-LAST:event_opc2ActionPerformed
 
     private void opc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc3ActionPerformed
-     opc3.getLabel();
+     select [x] = opc3.getLabel();
     }//GEN-LAST:event_opc3ActionPerformed
+
+    private void JuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JuegoActionPerformed
+       new inicio().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_JuegoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,6 +392,7 @@ public class Preguntas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Contador;
+    private javax.swing.JButton Juego;
     private javax.swing.JLabel Materia;
     private javax.swing.JButton avanzar;
     private javax.swing.ButtonGroup buttonGroup1;
