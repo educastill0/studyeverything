@@ -6,8 +6,8 @@ import java.util.StringTokenizer;
 public class respuestas {
     
     String[] respuestas ={
-        "1.55","29.40 y 8.75","4000","49","15 y 8","40 y 20","32, 34 y 36","Ecuacion de primer grado",
-        "4 metros","Leer los poemas que en contraron y compartirlos con los compañeros",
+        "Ecuaciones","29.40 y 8.75","Funcion","49","El Teorema de Tales.","El teorema de Pitagoras.","32, 34 y 36","Ecuacion de primer grado",
+        "13,000 km","Leer los poemas que en contraron y compartirlos con los compañeros",
         "los datos del libro de donde se obtuvo","El Verbo","Pretérito","Recuadro Blanco y Mayúsculas",
         "Introducción",
     };
